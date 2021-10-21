@@ -14,10 +14,12 @@ class DefaultStrategyTest extends TestCase
     {
         $params = [];
 
+        $constraints = [];
+
         $request = $this->createMock(Request::class);
 
         $strategy = new DefaultStrategy();
 
-        $this->assertTrue($strategy->isEnabled($params, $request));
+        $this->assertTrue($strategy->isEnabled($params, $constraints, $request));
     }
 }

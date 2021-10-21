@@ -15,12 +15,14 @@ class ApplicationHostnameStrategyTest extends TestCase
             'hostNames' => 'example.com',
         ];
 
+        $constraints = [];
+
         $request = $this->createMock(Request::class);
         $request->expects($this->once())->method('getHost')->willReturn('example.com');
 
         $strategy = new ApplicationHostnameStrategy();
 
-        $this->assertTrue($strategy->isEnabled($params, $request));
+        $this->assertTrue($strategy->isEnabled($params, $constraints, $request));
     }
 
     public function testWithApplicationHostname()
@@ -29,12 +31,14 @@ class ApplicationHostnameStrategyTest extends TestCase
             'hostNames' => 'example.com,hostname.com',
         ];
 
+        $constraints = [];
+
         $request = $this->createMock(Request::class);
         $request->expects($this->once())->method('getHost')->willReturn('example.com');
 
         $strategy = new ApplicationHostnameStrategy();
 
-        $this->assertTrue($strategy->isEnabled($params, $request));
+        $this->assertTrue($strategy->isEnabled($params, $constraints, $request));
     }
 
     public function testWithInvalidApplicationHostname()
@@ -43,24 +47,28 @@ class ApplicationHostnameStrategyTest extends TestCase
             'hostNames' => 'example.com,hostname.com',
         ];
 
+        $constraints = [];
+
         $request = $this->createMock(Request::class);
         $request->expects($this->once())->method('getHost')->willReturn('somewhere.com');
 
         $strategy = new ApplicationHostnameStrategy();
 
-        $this->assertFalse($strategy->isEnabled($params, $request));
+        $this->assertFalse($strategy->isEnabled($params, $constraints, $request));
     }
 
     public function testWithoutRemoteAddressParameters()
     {
         $params = [];
 
+        $constraints = [];
+
         $request = $this->createMock(Request::class);
         $request->expects($this->never())->method('getHost');
 
         $strategy = new ApplicationHostnameStrategy();
 
-        $this->assertFalse($strategy->isEnabled($params, $request));
+        $this->assertFalse($strategy->isEnabled($params, $constraints, $request));
     }
 
     public function testWithEmptyRemoteAddressParameters()
@@ -69,11 +77,13 @@ class ApplicationHostnameStrategyTest extends TestCase
             'hostNames' => '',
         ];
 
+        $constraints = [];
+
         $request = $this->createMock(Request::class);
         $request->expects($this->never())->method('getHost');
 
         $strategy = new ApplicationHostnameStrategy();
 
-        $this->assertFalse($strategy->isEnabled($params, $request));
+        $this->assertFalse($strategy->isEnabled($params, $constraints, $request));
     }
 }

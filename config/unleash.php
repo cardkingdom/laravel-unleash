@@ -47,4 +47,8 @@ return [
     'remoteAddress' => \MikeFrancis\LaravelUnleash\Strategies\RemoteAddressStrategy::class,
     'userWithId' => \MikeFrancis\LaravelUnleash\Strategies\UserWithIdStrategy::class,
   ],
+
+  'constraints' => [
+    'environment' => \MikeFrancis\LaravelUnleash\Constraints\EnvironmentConstraintHandler::class,
+  ],
 ];
