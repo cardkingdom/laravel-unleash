@@ -89,7 +89,7 @@ class DynamicStrategyTest extends TestCase
     }
 
     /**
-     * @param  MockObject $strategy
+     * @param MockObject $strategy
      * @return Config|MockObject
      */
     protected function getMockConfig(MockObject $strategy)

@@ -8,12 +8,12 @@ use Illuminate\Contracts\Config\Repository as Config;
 trait ConstraintHelper
 {
     /**
-     * @property array $allConstraints
+     * @property Config $config
      */
-    private $allConstraints;
+    private $config;
 
     public function __construct(Config $config) {
-        $this->allConstraints = $config->get('unleash.constraints', []);
+        $this->config = $config;
     }
 
     /**
@@ -21,17 +21,18 @@ trait ConstraintHelper
      */
     public function validateConstraints(array $constraints): bool
     {
+        $allConstraints = $this->config->get('unleash.constraints', []);
         foreach ($constraints as $constraint) {
             $context = $constraint['contextName'];
 
-            if (!array_key_exists($context, $this->allConstraints)) {
+            if (!array_key_exists($context, $allConstraints)) {
                 continue;
             }
 
-            if (is_callable($this->allConstraints[$context])) {
-                $constraintHandler = $this->allConstraints[$context]();
+            if (is_callable($allConstraints[$context])) {
+                $constraintHandler = $allConstraints[$context]($this->config);
             } else {
-                $constraintHandler = new $this->allConstraints[$context];
+                $constraintHandler = new $allConstraints[$context]($this->config);
             }
 
             if (!$constraintHandler instanceof ConstraintHandler) {

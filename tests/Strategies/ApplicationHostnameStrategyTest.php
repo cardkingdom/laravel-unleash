@@ -2,10 +2,10 @@
 
 namespace MikeFrancis\LaravelUnleash\Tests\Strategies;
 
+use Illuminate\Contracts\Config\Repository as Config;
 use Illuminate\Http\Request;
 use MikeFrancis\LaravelUnleash\Strategies\ApplicationHostnameStrategy;
 use PHPUnit\Framework\TestCase;
-use Illuminate\Contracts\Config\Repository as Config;
 
 class ApplicationHostnameStrategyTest extends TestCase
 {

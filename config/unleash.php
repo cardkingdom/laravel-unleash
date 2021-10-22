@@ -53,7 +53,7 @@ return [
 
   // Mapping of constraints used to guard features on Unleash. The default strategy is already
   // mapped below, and more strategies can be added - they just need to implement the
-  // `\MikeFrancis\LaravelUnleash\Constraints\ConstraintHandler` interface. If you would like to disable
+  // `\MikeFrancis\LaravelUnleash\Constraints\ConstraintHandler` abstract class. If you would like to disable
   // a built-in constraint, please comment it out or remove it below.
   'constraints' => [
     'environment' => \MikeFrancis\LaravelUnleash\Constraints\EnvironmentConstraintHandler::class,

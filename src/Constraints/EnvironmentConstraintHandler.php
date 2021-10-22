@@ -5,7 +5,7 @@ namespace MikeFrancis\LaravelUnleash\Constraints;
 use Exception;
 use Illuminate\Support\Facades\App;
 
-class EnvironmentConstraintHandler implements Contracts\ConstraintHandler
+class EnvironmentConstraintHandler extends Contracts\ConstraintHandler
 {
     /**
      * @throws Exception
@@ -16,12 +16,13 @@ class EnvironmentConstraintHandler implements Contracts\ConstraintHandler
             throw new Exception('Operator ' . $operator . ' is not one of ' . implode(',', Operators::ALL_OPERATORS));
         }
 
-        $validEnvironment = App::environment($values);
+        $environment = $this->config->get('unleash.featuresEndpoint');
+        $isValid = in_array($environment, $values);
 
         if ($operator == Operators::IN) {
-            return $validEnvironment;
+            return $isValid;
         } else {
-            return !$validEnvironment;
+            return !$isValid;
         }
     }
 }
