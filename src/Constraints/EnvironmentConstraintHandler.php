@@ -3,7 +3,6 @@
 namespace MikeFrancis\LaravelUnleash\Constraints;
 
 use Exception;
-use Illuminate\Support\Facades\App;
 
 class EnvironmentConstraintHandler extends Contracts\ConstraintHandler
 {
