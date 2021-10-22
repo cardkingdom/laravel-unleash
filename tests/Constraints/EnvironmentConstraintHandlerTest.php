@@ -16,7 +16,7 @@ class EnvironmentConstraintHandlerTest extends TestCase
 
         $config = $this->createMock(Config::class);
         $config->expects($this->exactly(1))->method('get')
-            ->with('unleash.featuresEndpoint')
+            ->with('unleash.environment')
             ->willReturn('testing');
 
         $constraintHandler = new EnvironmentConstraintHandler($config);
@@ -31,7 +31,7 @@ class EnvironmentConstraintHandlerTest extends TestCase
 
         $config = $this->createMock(Config::class);
         $config->expects($this->exactly(1))->method('get')
-            ->with('unleash.featuresEndpoint')
+            ->with('unleash.environment')
             ->willReturn('testing');
 
         $constraintHandler = new EnvironmentConstraintHandler($config);
@@ -46,7 +46,7 @@ class EnvironmentConstraintHandlerTest extends TestCase
 
         $config = $this->createMock(Config::class);
         $config->expects($this->exactly(1))->method('get')
-            ->with('unleash.featuresEndpoint')
+            ->with('unleash.environment')
             ->willReturn('testing');
 
         $constraintHandler = new EnvironmentConstraintHandler($config);
@@ -61,7 +61,7 @@ class EnvironmentConstraintHandlerTest extends TestCase
 
         $config = $this->createMock(Config::class);
         $config->expects($this->exactly(1))->method('get')
-            ->with('unleash.featuresEndpoint')
+            ->with('unleash.environment')
             ->willReturn('testing');
 
         $constraintHandler = new EnvironmentConstraintHandler($config);

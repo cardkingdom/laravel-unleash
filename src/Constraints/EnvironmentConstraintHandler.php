@@ -16,12 +16,12 @@ class EnvironmentConstraintHandler extends Contracts\ConstraintHandler
         }
 
         $environment = $this->config->get('unleash.environment');
-        $isValid = in_array($environment, $values);
+        $isInEnvironment = in_array($environment, $values);
 
         if ($operator == Operators::IN) {
-            return $isValid;
+            return $isInEnvironment;
         } else {
-            return !$isValid;
+            return !$isInEnvironment;
         }
     }
 }
