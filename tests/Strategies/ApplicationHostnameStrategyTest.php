@@ -5,6 +5,7 @@ namespace MikeFrancis\LaravelUnleash\Tests\Strategies;
 use Illuminate\Http\Request;
 use MikeFrancis\LaravelUnleash\Strategies\ApplicationHostnameStrategy;
 use PHPUnit\Framework\TestCase;
+use Illuminate\Contracts\Config\Repository as Config;
 
 class ApplicationHostnameStrategyTest extends TestCase
 {
@@ -20,7 +21,9 @@ class ApplicationHostnameStrategyTest extends TestCase
         $request = $this->createMock(Request::class);
         $request->expects($this->once())->method('getHost')->willReturn('example.com');
 
-        $strategy = new ApplicationHostnameStrategy();
+        $config = $this->createMock(Config::class);
+
+        $strategy = new ApplicationHostnameStrategy($config);
 
         $this->assertTrue($strategy->isEnabled($params, $constraints, $request));
     }
@@ -36,7 +39,9 @@ class ApplicationHostnameStrategyTest extends TestCase
         $request = $this->createMock(Request::class);
         $request->expects($this->once())->method('getHost')->willReturn('example.com');
 
-        $strategy = new ApplicationHostnameStrategy();
+        $config = $this->createMock(Config::class);
+
+        $strategy = new ApplicationHostnameStrategy($config);
 
         $this->assertTrue($strategy->isEnabled($params, $constraints, $request));
     }
@@ -52,7 +57,9 @@ class ApplicationHostnameStrategyTest extends TestCase
         $request = $this->createMock(Request::class);
         $request->expects($this->once())->method('getHost')->willReturn('somewhere.com');
 
-        $strategy = new ApplicationHostnameStrategy();
+        $config = $this->createMock(Config::class);
+
+        $strategy = new ApplicationHostnameStrategy($config);
 
         $this->assertFalse($strategy->isEnabled($params, $constraints, $request));
     }
@@ -66,7 +73,9 @@ class ApplicationHostnameStrategyTest extends TestCase
         $request = $this->createMock(Request::class);
         $request->expects($this->never())->method('getHost');
 
-        $strategy = new ApplicationHostnameStrategy();
+        $config = $this->createMock(Config::class);
+
+        $strategy = new ApplicationHostnameStrategy($config);
 
         $this->assertFalse($strategy->isEnabled($params, $constraints, $request));
     }
@@ -82,7 +91,9 @@ class ApplicationHostnameStrategyTest extends TestCase
         $request = $this->createMock(Request::class);
         $request->expects($this->never())->method('getHost');
 
-        $strategy = new ApplicationHostnameStrategy();
+        $config = $this->createMock(Config::class);
+
+        $strategy = new ApplicationHostnameStrategy($config);
 
         $this->assertFalse($strategy->isEnabled($params, $constraints, $request));
     }
