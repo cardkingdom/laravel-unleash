@@ -15,7 +15,7 @@ class EnvironmentConstraintHandler extends Contracts\ConstraintHandler
             throw new Exception('Operator ' . $operator . ' is not one of ' . implode(',', Operators::ALL_OPERATORS));
         }
 
-        $environment = $this->config->get('unleash.featuresEndpoint');
+        $environment = $this->config->get('unleash.environment');
         $isValid = in_array($environment, $values);
 
         if ($operator == Operators::IN) {
