@@ -4,6 +4,7 @@ namespace MikeFrancis\LaravelUnleash\Constraints\Contracts;
 
 use Exception;
 use Illuminate\Contracts\Config\Repository as Config;
+use Illuminate\Support\Facades\Log;
 
 trait ConstraintHelper
 {
@@ -12,7 +13,8 @@ trait ConstraintHelper
      */
     private $config;
 
-    public function __construct(Config $config) {
+    public function __construct(Config $config)
+    {
         $this->config = $config;
     }
 
@@ -26,6 +28,7 @@ trait ConstraintHelper
             $context = $constraint['contextName'];
 
             if (!array_key_exists($context, $allConstraints)) {
+                Log::warning("The ${$context} constraint is currently unsupported.");
                 continue;
             }
 
@@ -36,7 +39,7 @@ trait ConstraintHelper
             }
 
             if (!$constraintHandler instanceof ConstraintHandler) {
-                throw new Exception("${$context} does not implement base ConstraintHandler.");
+                throw new Exception(get_class($constraintHandler) . " does not implement base ConstraintHandler.");
             }
 
             $operator = $constraint['operator'];
